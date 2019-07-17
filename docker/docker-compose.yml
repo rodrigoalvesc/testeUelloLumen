@@ -1,0 +1,27 @@
+version: '2'
+services:
+  php:
+    build: ./php
+    container_name: php
+    volumes:
+      - ../:/var/www/html
+    ports:
+      - "9000:9000"
+    links:
+      - mysql
+
+  mysql:
+    build: ./mysql
+    container_name: mysql
+    volumes:
+      - ../mysql:/var/www/html/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: uello
+      MYSQL_USER: adm
+      MYSQL_PASSWORD: adm321
+networks:
+  default:
+    driver: bridge
